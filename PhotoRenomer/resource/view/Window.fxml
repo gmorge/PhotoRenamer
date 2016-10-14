@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane minHeight="250.0" minWidth="420.0" prefHeight="250.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLController">
+   <top>
+      <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" snapToPixel="false" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane prefHeight="36.0" prefWidth="400.0">
+               <left>
+                  <Label text="Répertoire :" BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding></Label>
+               </left>
+               <center>
+                  <TextField fx:id="tfPath" prefHeight="26.0" prefWidth="209.0" BorderPane.alignment="CENTER" />
+               </center>
+               <right>
+                  <Button fx:id="bBrowse" mnemonicParsing="false" onAction="#Browse" prefHeight="26.0" prefWidth="92.0" text="Parcourir..." BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets right="5.0" />
+                     </BorderPane.margin></Button>
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="36.0" prefWidth="400.0">
+               <left>
+                  <Label text="Nom commun :" BorderPane.alignment="CENTER" />
+               </left>
+               <center>
+                  <TextField fx:id="tfName" prefHeight="26.0" prefWidth="280.0" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="5.0" />
+                     </BorderPane.margin></TextField>
+               </center>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </BorderPane>
+            <BorderPane prefHeight="36.0" prefWidth="400.0">
+               <left>
+                  <CheckBox fx:id="cbIndex" mnemonicParsing="false" text="Décaler index :" BorderPane.alignment="CENTER" />
+               </left>
+               <center>
+                  <TextField BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="5.0" />
+                     </BorderPane.margin></TextField>
+               </center>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </BorderPane>
+            <HBox alignment="CENTER_LEFT" minWidth="400.0" prefWidth="400.0" spacing="10.0">
+               <children>
+                  <CheckBox fx:id="cbExt" mnemonicParsing="false" text="Extension en minuscule" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" minHeight="25.0" minWidth="400.0" prefHeight="25.0" prefWidth="400.0" spacing="10.0">
+               <children>
+                  <Label text="Preview :" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <ListView fx:id="lvFiles" prefHeight="47.0" prefWidth="697.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </BorderPane.margin></ListView>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" minWidth="400.0" prefWidth="400.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="bRename" mnemonicParsing="false" text="Renommer" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</BorderPane>
