@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javax.swing.JFileChooser;
+import javafx.stage.DirectoryChooser;
+import java.io.File;
+import launcher.PhotoRenamer;
 import viewmodel.FilesVM;
 
 /**
@@ -44,20 +46,16 @@ public class FXMLController {
     
     public void Browse(ActionEvent e) {
         String path = null;
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int returnVal = chooser.showOpenDialog(null);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
-           path = chooser.getSelectedFile().toString();
-        }
-        
-    
-    System.out.println("Path du Controller : " +path);
-    filesVM.setInitialPath(path);
-    
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle("PhotoRenamer");
+        File result = chooser.showDialog(PhotoRenamer.getStage());
+        path = result.getAbsolutePath();
+             
+        System.out.println("Path du Controller : " +path);
+        filesVM.setInitialPath(path);
     
     }
-   
+       
         
     
 }

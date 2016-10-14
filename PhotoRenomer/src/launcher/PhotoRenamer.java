@@ -12,6 +12,8 @@ import javafx.stage.Stage;
  */
 public class PhotoRenamer extends Application {
     
+    private static Stage stage;
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/Window.fxml"));
@@ -27,6 +29,10 @@ public class PhotoRenamer extends Application {
         
     }
 
+    public static Stage getStage() {
+        return stage;
+    }
+    
     /**
      * @param args the command line arguments
      */
