@@ -1,5 +1,7 @@
 package viewmodel;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.FileFolder;
@@ -8,26 +10,51 @@ import model.FileFolder;
  *
  * @author gemorge
  */
-public class FileFolderVM {
+public class FileFolderVM implements PropertyChangeListener {
 
-    private FileFolder model;
-    private final StringProperty name = new SimpleStringProperty();
-
-    public FileFolderVM(FileFolder f) {
-        model = f;
-    }
+    private final FileFolder model;
     
-    public String getName() {
-        return name.get();
+    /**
+    * Property of name
+    */
+    private final StringProperty listOfFiles = new SimpleStringProperty();
+        public String getListOfFiles() {return listOfFiles.get();}
+        public void setListOfFiles(String value) {listOfFiles.set(value);}
+        public StringProperty listOfFilesProperty() {return listOfFiles;}
+        
+    /**
+     * Constructor
+     *
+     * @param f path of directory
+     */   
+    public FileFolderVM(FileFolder f) {
+        
+        model = f;
+        
+        listOfFiles.set(model.getListOfFiles());
+        
+        model.addPropertyChangeListener(this);
+        
+        listOfFiles.addListener((o,old,newV) -> listOfFiles.setValue(newV));
+           
+        }
+    
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals(FileFolder.PROP_LISTOFFILES)) {
+            listOfFiles.set(evt.getNewValue().toString());
+        }
     }
+}
+    
+    
+    
+    
+   
 
-    public void setName(String value) {
-        name.set(value);
-    }
+    
 
-    public StringProperty nameProperty() {
-        return name;
-    }
+    
     
        
-}
+

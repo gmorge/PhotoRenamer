@@ -11,31 +11,36 @@ public class FileFolder {
     
     private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
-    private String name;
-    public static final String PROP_NAME = "name";
+    private String listOfFiles;
+    public static final String PROP_LISTOFFILES = "listOfFiles";
     
+    /**
+     * Constructor
+     *
+     * @param name path of directory
+     */
     public FileFolder(String name) {
         
     }
 
     /**
-     * Get the value of name
+     * Get the value of listOfFiles
      *
-     * @return the value of name
+     * @return the value of listOfFiles
      */
-    public String getName() {
-        return name;
+    public String getListOfFiles() {
+        return listOfFiles;
     }
 
     /**
-     * Set the value of name
+     * Set the value of listOfFiles
      *
-     * @param name new value of name
+     * @param listOfFiles new value of listOfFiles
      */
-    public void setName(String name) {
-        String oldName = this.name;
-        this.name = name;
-        propertyChangeSupport.firePropertyChange(PROP_NAME, oldName, name);
+    public void setListOfFiles(String listOfFiles) {
+        String oldName = this.listOfFiles;
+        this.listOfFiles = listOfFiles;
+        propertyChangeSupport.firePropertyChange(PROP_LISTOFFILES, oldName, listOfFiles);
     }
 
     /**

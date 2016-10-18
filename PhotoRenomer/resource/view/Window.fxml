@@ -9,7 +9,7 @@
 
 <BorderPane minHeight="250.0" minWidth="420.0" prefHeight="250.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLController">
    <top>
-      <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" snapToPixel="false" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" snapToPixel="false" BorderPane.alignment="CENTER">
          <children>
             <BorderPane prefHeight="36.0" prefWidth="400.0">
                <left>
@@ -56,22 +56,28 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </BorderPane>
-            <HBox alignment="CENTER_LEFT" minWidth="400.0" prefWidth="400.0" spacing="10.0">
-               <children>
-                  <CheckBox fx:id="cbExt" mnemonicParsing="false" text="Extension en minuscule" />
-               </children>
+            <BorderPane prefHeight="36.0" prefWidth="400.0">
+               <left>
+                  <Label text="Preview :" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <HBox BorderPane.alignment="CENTER">
+                     <children>
+                        <Label alignment="CENTER" text="Nombre de fichiers :">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding></Label>
+                        <Label fx:id="lFileCount" alignment="CENTER" >
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding></Label>
+                     </children>
+                  </HBox>
+               </right>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" minHeight="25.0" minWidth="400.0" prefHeight="25.0" prefWidth="400.0" spacing="10.0">
-               <children>
-                  <Label text="Preview :" />
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
+            </BorderPane>
          </children>
       </VBox>
    </top>

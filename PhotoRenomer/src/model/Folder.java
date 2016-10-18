@@ -22,7 +22,8 @@ public class Folder {
     private List<model.FileFolder> filesList;
     public static final String PROP_FILESLIST = "filesList";
 
-    public int filecount = 0;
+    public int fileCount = 0;
+    public static final String PROP_FILECOUNT = "fileCount";
 
     /**
      * Constructor
@@ -35,9 +36,7 @@ public class Folder {
     }
     
     public void listingFiles () {
-
-        System.out.println("Path du modele : " + initialPath);
-
+        
         if (initialPath != null) {
             File file = new File(initialPath);
             File[] files = file.listFiles(new FilenameFilter() {
@@ -51,12 +50,12 @@ public class Folder {
                     FileFolder tmp = new FileFolder(files[i].getName());
                     filesList.add(tmp);
                     propertyChangeSupport.fireIndexedPropertyChange(PROP_FILESLIST, filesList.indexOf(tmp), null, tmp);
-                    this.filecount++;
+                    this.fileCount++;
                 }
             }
             //else
         }
-        System.out.println("Nombres de fichiers " + filecount);
+        System.out.println("Nombre de fichiers " + fileCount);
     }
 
     /**
@@ -74,7 +73,7 @@ public class Folder {
      * @param initialPath new value of initialPath
      */
     public void setInitialPath(String initialPath) {
-        System.out.println("Path du modele : " + initialPath);
+        
         String oldInitialPath = this.initialPath;
         this.initialPath = initialPath;
         propertyChangeSupport.firePropertyChange(PROP_INITIALPATH, oldInitialPath, initialPath);
@@ -99,7 +98,16 @@ public class Folder {
         this.filesList = filesList;
         propertyChangeSupport.firePropertyChange(PROP_FILESLIST, oldFilesList, filesList);
     }
-
+    
+     /**
+     * Get the value of fileCount
+     *
+     * @return the value of fileCount
+     */
+    public int getFileCount() {
+        return fileCount;
+    }
+    
     /**
      * Add PropertyChangeListener.
      *

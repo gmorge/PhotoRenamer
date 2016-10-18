@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import java.io.File;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import launcher.PhotoRenamer;
 import viewmodel.FileFolderVM;
@@ -31,8 +32,8 @@ public class FXMLController {
     private CheckBox cbIndex;
     
     @FXML
-    private CheckBox cbExt;
-    
+    private Label lFileCount;
+       
     @FXML
     private ListView<FileFolderVM> lvFiles;
     
@@ -44,6 +45,7 @@ public class FXMLController {
         filesVM = new FolderVM();
         tfPath.textProperty().bind(filesVM.initialPathProperty());
         lvFiles.itemsProperty().bind(filesVM.fileListProperty());
+        lFileCount.textProperty().bind(filesVM.fileCountProperty());
         setCellFactory();
     }
     
@@ -66,7 +68,7 @@ public class FXMLController {
             protected void updateItem(FileFolderVM item, boolean empty) {
                 super.updateItem(item, empty);
                 if (!empty) {
-                    textProperty().bind(item.nameProperty());
+                    textProperty().bind(item.listOfFilesProperty());
                 } else {
                     textProperty().unbind();
                     setText("");

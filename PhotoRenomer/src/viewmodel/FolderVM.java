@@ -3,7 +3,6 @@ package viewmodel;
 import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Collections;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,12 +18,38 @@ import model.Folder;
  */
 public class FolderVM implements PropertyChangeListener {
     
-    private final StringProperty initialPath = new SimpleStringProperty();
     private Folder files;
-    
+       
+    /**
+    * Property of initialPath
+    */
+    private final StringProperty initialPath = new SimpleStringProperty();
+        public String getInitialPath() {return files.getInitialPath();}
+        public void setInitialPath(String value) {files.setInitialPath(value);}
+        public StringProperty initialPathProperty() {return initialPath;}
+        
+    /**
+    * Property of fileCount
+    */
+    private final StringProperty fileCount = new SimpleStringProperty();
+        public int getFileCount() {return files.getFileCount();}
+        public StringProperty fileCountProperty() {return fileCount;}
+        
+    /**
+    * Property of fileList
+    */
+    private ObservableList<FileFolderVM> fileListObs = FXCollections.observableArrayList();
+        private final ListProperty<FileFolderVM> fileList = new SimpleListProperty<FileFolderVM>(fileListObs);
+        public ObservableList getFileList() {return fileList.get();}
+        public void setFileList(ObservableList value) {fileList.set(value);}
+        public ListProperty fileListProperty() {return fileList;}   
+      
+    /**
+     * Constructor
+     *
+     */     
     public FolderVM() {
                
-        System.out.println("Path de la VM : " +initialPath);
         files = new Folder(null);
         
         initialPath.set(files.getInitialPath());
@@ -35,31 +60,9 @@ public class FolderVM implements PropertyChangeListener {
             files.setInitialPath(newV);
             files.listingFiles();
                 });
-        
+        //fileCount.set(files.getFileCount());
     }
     
-    /**
-    * Property of initialPath
-    */
-    public String getInitialPath() {return files.getInitialPath();}
-    public void setInitialPath(String value) {files.setInitialPath(value);}
-    public StringProperty initialPathProperty() {return initialPath;}
-    
-    private ObservableList<FileFolderVM> fileListObs = FXCollections.observableArrayList();
-    private final ListProperty<FileFolderVM> fileList = new SimpleListProperty<FileFolderVM>(fileListObs);
-
-    public ObservableList getFileList() {
-        return fileList.get();
-    }
-
-    public void setFileList(ObservableList value) {
-        fileList.set(value);
-    }
-
-    public ListProperty fileListProperty() {
-        return fileList;
-    }
-
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals(Folder.PROP_INITIALPATH)) {
@@ -67,6 +70,9 @@ public class FolderVM implements PropertyChangeListener {
         }
         if (evt.getPropertyName().equals(Folder.PROP_FILESLIST)) {
             fileListObs.add(((IndexedPropertyChangeEvent)evt).getIndex(), new FileFolderVM((FileFolder)evt.getNewValue()));  
+        }
+        if (evt.getPropertyName().equals(Folder.PROP_FILECOUNT)) {
+            fileCount.set(evt.getNewValue().toString());
         }
     }
 
