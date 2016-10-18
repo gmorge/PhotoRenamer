@@ -10,9 +10,8 @@ import java.beans.PropertyChangeSupport;
 public class FileFolder {
     
     private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-
-    private String listOfFiles;
-    public static final String PROP_LISTOFFILES = "listOfFiles";
+    private String fileName;
+    public static final String PROP_FILENAME = "fileName";
     
     /**
      * Constructor
@@ -20,28 +19,31 @@ public class FileFolder {
      * @param name path of directory
      */
     public FileFolder(String name) {
-        
+        setFileName(name);
     }
 
     /**
-     * Get the value of listOfFiles
+     * Get the value of fileName
      *
-     * @return the value of listOfFiles
+     * @return the value of fileName
      */
-    public String getListOfFiles() {
-        return listOfFiles;
+    public String getFileName() {
+        return fileName;
     }
 
     /**
-     * Set the value of listOfFiles
+     * Set the value of fileName
      *
-     * @param listOfFiles new value of listOfFiles
+     * @param fileName new value of fileName
      */
-    public void setListOfFiles(String listOfFiles) {
-        String oldName = this.listOfFiles;
-        this.listOfFiles = listOfFiles;
-        propertyChangeSupport.firePropertyChange(PROP_LISTOFFILES, oldName, listOfFiles);
+    public void setFileName(String fileName) {
+        String oldFileName = this.fileName;
+        this.fileName = fileName;
+        propertyChangeSupport.firePropertyChange(PROP_FILENAME, null, fileName);
     }
+
+    
+    
 
     /**
      * Add PropertyChangeListener.

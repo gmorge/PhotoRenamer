@@ -68,7 +68,7 @@ public class FXMLController {
             protected void updateItem(FileFolderVM item, boolean empty) {
                 super.updateItem(item, empty);
                 if (!empty) {
-                    textProperty().bind(item.listOfFilesProperty());
+                    textProperty().bind(item.nameOfFileProperty());
                 } else {
                     textProperty().unbind();
                     setText("");

@@ -13,14 +13,24 @@ import model.FileFolder;
 public class FileFolderVM implements PropertyChangeListener {
 
     private final FileFolder model;
-    
-    /**
+    private final StringProperty nameOfFile = new SimpleStringProperty();
+     /**
     * Property of name
     */
-    private final StringProperty listOfFiles = new SimpleStringProperty();
-        public String getListOfFiles() {return listOfFiles.get();}
-        public void setListOfFiles(String value) {listOfFiles.set(value);}
-        public StringProperty listOfFilesProperty() {return listOfFiles;}
+    public String getNameOfFile() {
+        return nameOfFile.get();
+    }
+
+    public void setNameOfFile(String value) {
+        nameOfFile.set(value);
+    }
+
+    public StringProperty nameOfFileProperty() {
+        return nameOfFile;
+    }
+    
+   
+   
         
     /**
      * Constructor
@@ -30,19 +40,18 @@ public class FileFolderVM implements PropertyChangeListener {
     public FileFolderVM(FileFolder f) {
         
         model = f;
-        
-        listOfFiles.set(model.getListOfFiles());
+        nameOfFile.set(model.getFileName());
         
         model.addPropertyChangeListener(this);
         
-        listOfFiles.addListener((o,old,newV) -> listOfFiles.setValue(newV));
+        nameOfFile.addListener((o,old,newV) -> nameOfFile.setValue(newV));
            
         }
     
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals(FileFolder.PROP_LISTOFFILES)) {
-            listOfFiles.set(evt.getNewValue().toString());
+        if (evt.getPropertyName().equals(FileFolder.PROP_FILENAME)) {
+            nameOfFile.set(evt.getNewValue().toString());
         }
     }
 }
