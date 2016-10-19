@@ -29,17 +29,18 @@ public class FolderVM implements PropertyChangeListener {
         public StringProperty initialPathProperty() {return initialPath;}
         
     /**
-    * Property of fileCount
+    * Property of fileCountS
     */
-    private final StringProperty fileCount = new SimpleStringProperty();
-        public int getFileCount() {return files.getFileCount();}
-        public StringProperty fileCountProperty() {return fileCount;}
+    private final StringProperty fileCountS = new SimpleStringProperty();
+        public String getFileCountS() {return files.getFileCountS();}
+        public void setFileCountS(String value) {files.setFileCountS(value);}
+        public StringProperty fileCountSProperty() {return fileCountS;}
         
     /**
     * Property of fileList
     */
-    private ObservableList<FileFolderVM> fileListObs = FXCollections.observableArrayList();
-        private final ListProperty<FileFolderVM> fileList = new SimpleListProperty<FileFolderVM>(fileListObs);
+    private final ObservableList<FileFolderVM> fileListObs = FXCollections.observableArrayList();
+        private final ListProperty<FileFolderVM> fileList = new SimpleListProperty<>(fileListObs);
         public ObservableList getFileList() {return fileList.get();}
         public void setFileList(ObservableList value) {fileList.set(value);}
         public ListProperty fileListProperty() {return fileList;}   
@@ -53,14 +54,15 @@ public class FolderVM implements PropertyChangeListener {
         files = new Folder(null);
         
         initialPath.set(files.getInitialPath());
+        fileCountS.set(files.getFileCountS());
         
         files.addPropertyChangeListener(this);
         
         initialPath.addListener((o,old,newV) -> {
             files.setInitialPath(newV);
-            files.listingFiles();
-                });
-        //fileCount.set(files.getFileCount());
+            files.listingFiles();});
+        
+        fileCountS.addListener((o,old,newV) -> files.setFileCountS(newV));  
     }
     
     @Override
@@ -71,10 +73,9 @@ public class FolderVM implements PropertyChangeListener {
         if (evt.getPropertyName().equals(Folder.PROP_FILESLIST)) {
             fileListObs.add(((IndexedPropertyChangeEvent)evt).getIndex(), new FileFolderVM((FileFolder)evt.getNewValue()));  
         }
-        if (evt.getPropertyName().equals(Folder.PROP_FILECOUNT)) {
-            fileCount.set(evt.getNewValue().toString());
+        if (evt.getPropertyName().equals(Folder.PROP_FILECOUNTS)) {
+            fileCountS.set(evt.getNewValue().toString());
         }
     }
-
     
 }

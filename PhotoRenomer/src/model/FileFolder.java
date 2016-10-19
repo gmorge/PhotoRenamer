@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
  *
  * @author gemorge
  */
-public class FileFolder {
+public final class FileFolder {
     
     private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
     private String fileName;
@@ -42,9 +42,6 @@ public class FileFolder {
         propertyChangeSupport.firePropertyChange(PROP_FILENAME, null, fileName);
     }
 
-    
-    
-
     /**
      * Add PropertyChangeListener.
      *
@@ -63,6 +60,4 @@ public class FileFolder {
         propertyChangeSupport.removePropertyChangeListener(listener);
     }
 
-    
-    
 }

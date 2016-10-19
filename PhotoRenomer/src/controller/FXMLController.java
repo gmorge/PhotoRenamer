@@ -37,15 +37,13 @@ public class FXMLController {
     @FXML
     private ListView<FileFolderVM> lvFiles;
     
-    private FolderVM filesVM;
+    private FolderVM folderVM;
     
     public void initialize() {
-        
-
-        filesVM = new FolderVM();
-        tfPath.textProperty().bind(filesVM.initialPathProperty());
-        lvFiles.itemsProperty().bind(filesVM.fileListProperty());
-        lFileCount.textProperty().bind(filesVM.fileCountProperty());
+        folderVM = new FolderVM();
+        tfPath.textProperty().bind(folderVM.initialPathProperty());
+        lvFiles.itemsProperty().bind(folderVM.fileListProperty());
+        lFileCount.textProperty().bind(folderVM.fileCountSProperty());
         setCellFactory();
     }
     
@@ -58,7 +56,7 @@ public class FXMLController {
         path = result.getAbsolutePath();
              
         System.out.println("Path du Controller : " +path);
-        filesVM.setInitialPath(path);
+        folderVM.setInitialPath(path);
     
     }
 

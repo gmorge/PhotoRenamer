@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author gemorge
  */
-public class Folder {
+public final class Folder {
 
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
@@ -23,7 +23,8 @@ public class Folder {
     public static final String PROP_FILESLIST = "filesList";
 
     public int fileCount = 0;
-    public static final String PROP_FILECOUNT = "fileCount";
+    public String fileCountS = "0";
+    public static final String PROP_FILECOUNTS = "fileCountS";
 
     /**
      * Constructor
@@ -33,29 +34,28 @@ public class Folder {
     public Folder(String initialPath) {
         setInitialPath(initialPath);
         filesList = new ArrayList<>();
+        setFileCountS(fileCountS);
     }
     
     public void listingFiles () {
         
         if (initialPath != null) {
             File file = new File(initialPath);
-            File[] files = file.listFiles(new FilenameFilter() {
-                public boolean accept(File file, String name) {
-                    return name.toLowerCase().endsWith(".jpg");
-                }
-            });
+            File[] files = file.listFiles((File file1, String name) -> name.toLowerCase().endsWith(".jpg"));
             if (files != null) {
-                for (int i = 0; i < files.length; i++) {
-                    System.out.println("  Fichier: " + files[i].getName());
-                    FileFolder tmp = new FileFolder(files[i].getName());
+                for (File file1 : files) {
+                    System.out.println("  Fichier: " + file1.getName());
+                    FileFolder tmp = new FileFolder(file1.getName());
                     filesList.add(tmp);
                     propertyChangeSupport.fireIndexedPropertyChange(PROP_FILESLIST, filesList.indexOf(tmp), null, tmp);
                     this.fileCount++;
                 }
             }
-            //else
+            
         }
-        System.out.println("Nombre de fichiers " + fileCount);
+        fileCountS = Integer.toString(fileCount);
+        System.out.println("Nombre de fichiers int : " + fileCount);
+        System.out.println("Nombre de fichiers String : " + fileCountS);
     }
 
     /**
@@ -100,12 +100,23 @@ public class Folder {
     }
     
      /**
-     * Get the value of fileCount
+     * Get the value of fileCountS
      *
-     * @return the value of fileCount
+     * @return the value of fileCountS
      */
-    public int getFileCount() {
-        return fileCount;
+    public String getFileCountS() {
+        return fileCountS;
+    }
+
+    /**
+     * Set the value of filesList
+     *
+     * @param fileCountS new value of fileCountS
+     */
+    public void setFileCountS(String fileCountS) {
+        String oldFileCountS = this.fileCountS;
+        this.fileCountS = fileCountS;
+        propertyChangeSupport.firePropertyChange(PROP_FILECOUNTS, oldFileCountS, fileCountS);
     }
     
     /**

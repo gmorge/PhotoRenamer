@@ -28,10 +28,7 @@ public class FileFolderVM implements PropertyChangeListener {
     public StringProperty nameOfFileProperty() {
         return nameOfFile;
     }
-    
-   
-   
-        
+      
     /**
      * Constructor
      *

@@ -24,7 +24,7 @@ public class PhotoRenamer extends Application {
         stage.setScene(scene);
         stage.show();
         
-        stage.setMinHeight(440);
+        stage.setMinHeight(450);
         stage.setMinWidth(420);
         
     }
