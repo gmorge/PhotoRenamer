@@ -44,18 +44,15 @@ public final class Folder {
             File[] files = file.listFiles((File file1, String name) -> name.toLowerCase().endsWith(".jpg"));
             if (files != null) {
                 for (File file1 : files) {
-                    System.out.println("  Fichier: " + file1.getName());
                     FileFolder tmp = new FileFolder(file1.getName());
                     filesList.add(tmp);
                     propertyChangeSupport.fireIndexedPropertyChange(PROP_FILESLIST, filesList.indexOf(tmp), null, tmp);
                     this.fileCount++;
                 }
             }
-            
         }
         fileCountS = Integer.toString(fileCount);
-        System.out.println("Nombre de fichiers int : " + fileCount);
-        System.out.println("Nombre de fichiers String : " + fileCountS);
+        setFileCountS(fileCountS);
     }
 
     /**
@@ -122,7 +119,7 @@ public final class Folder {
     /**
      * Add PropertyChangeListener.
      *
-     * @param listener
+     * @param listener add Listner
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
@@ -131,7 +128,7 @@ public final class Folder {
     /**
      * Remove PropertyChangeListener.
      *
-     * @param listener
+     * @param listener remove listner
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.removePropertyChangeListener(listener);

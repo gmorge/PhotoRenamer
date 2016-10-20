@@ -40,6 +40,7 @@ public class FXMLController {
     
     private FolderVM folderVM;
     private ModderVM modderVM;
+    private String lastPath = "";
     
     public void initialize() {
         folderVM = new FolderVM();
@@ -56,8 +57,9 @@ public class FXMLController {
         chooser.setTitle("PhotoRenamer");
         File result = chooser.showDialog(PhotoRenamer.getStage());
         path = result.getAbsolutePath();
+        lastPath = result.getName();
         folderVM.setInitialPath(path);
-    
+        
     }
     
     private void binding() {
@@ -72,7 +74,9 @@ public class FXMLController {
             protected void updateItem(FileFolderVM item, boolean empty) {
                 super.updateItem(item, empty);
                 if (!empty) {
-                    textProperty().bind(item.nameOfFileProperty());
+                    textProperty().bind(item.nameOfFileProperty());                  
+                    tfName.textProperty().bindBidirectional(item.nameOfFileProperty());
+                    tfName.setText(lastPath);                    
                 } else {
                     textProperty().unbind();
                     setText("");

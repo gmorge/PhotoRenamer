@@ -14,9 +14,8 @@ public class FileFolderVM implements PropertyChangeListener {
 
     private final FileFolder model;
     private final StringProperty nameOfFile = new SimpleStringProperty();
-     /**
-    * Property of name
-    */
+    
+    
     public String getNameOfFile() {
         return nameOfFile.get();
     }
@@ -41,7 +40,7 @@ public class FileFolderVM implements PropertyChangeListener {
         
         model.addPropertyChangeListener(this);
         
-        nameOfFile.addListener((o,old,newV) -> nameOfFile.setValue(newV));
+        nameOfFile.addListener((o,old,newV) -> model.setFileName(newV));
            
         }
     

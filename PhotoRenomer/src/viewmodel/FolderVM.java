@@ -18,22 +18,22 @@ import model.Folder;
  */
 public class FolderVM implements PropertyChangeListener {
     
-    private Folder files;
+    private Folder folder;
        
     /**
     * Property of initialPath
     */
     private final StringProperty initialPath = new SimpleStringProperty();
-        public String getInitialPath() {return files.getInitialPath();}
-        public void setInitialPath(String value) {files.setInitialPath(value);}
+        public String getInitialPath() {return folder.getInitialPath();}
+        public void setInitialPath(String value) {folder.setInitialPath(value);}
         public StringProperty initialPathProperty() {return initialPath;}
         
     /**
     * Property of fileCountS
     */
     private final StringProperty fileCountS = new SimpleStringProperty();
-        public String getFileCountS() {return files.getFileCountS();}
-        public void setFileCountS(String value) {files.setFileCountS(value);}
+        public String getFileCountS() {return folder.getFileCountS();}
+        public void setFileCountS(String value) {folder.setFileCountS(value);}
         public StringProperty fileCountSProperty() {return fileCountS;}
         
     /**
@@ -51,18 +51,19 @@ public class FolderVM implements PropertyChangeListener {
      */     
     public FolderVM() {
                
-        files = new Folder(null);
+        folder = new Folder(null);
         
-        initialPath.set(files.getInitialPath());
-        fileCountS.set(files.getFileCountS());
+        initialPath.set(folder.getInitialPath());
+        fileCountS.set(folder.getFileCountS());
         
-        files.addPropertyChangeListener(this);
+        folder.addPropertyChangeListener(this);
         
         initialPath.addListener((o,old,newV) -> {
-            files.setInitialPath(newV);
-            files.listingFiles();});
+            folder.setInitialPath(newV);
+            folder.listingFiles();
+            fileCountS.set(folder.getFileCountS());});
         
-        fileCountS.addListener((o,old,newV) -> files.setFileCountS(newV));  
+        fileCountS.addListener((o,old,newV) -> folder.setFileCountS(newV));  
     }
     
     @Override
@@ -74,7 +75,8 @@ public class FolderVM implements PropertyChangeListener {
             fileListObs.add(((IndexedPropertyChangeEvent)evt).getIndex(), new FileFolderVM((FileFolder)evt.getNewValue()));  
         }
         if (evt.getPropertyName().equals(Folder.PROP_FILECOUNTS)) {
-            fileCountS.set(evt.getNewValue().toString());
+             System.out.println("Nombre de fichiers String FolderVM : " + fileCountS);
+            fileCountS.set((String)evt.getNewValue());
         }
     }
     

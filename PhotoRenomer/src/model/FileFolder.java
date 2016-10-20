@@ -13,6 +13,7 @@ public final class FileFolder {
     private String fileName;
     public static final String PROP_FILENAME = "fileName";
     
+    
     /**
      * Constructor
      *
@@ -38,14 +39,14 @@ public final class FileFolder {
      */
     public void setFileName(String fileName) {
         String oldFileName = this.fileName;
-        this.fileName = fileName;
+        this.fileName = fileName;        
         propertyChangeSupport.firePropertyChange(PROP_FILENAME, null, fileName);
     }
 
     /**
      * Add PropertyChangeListener.
      *
-     * @param listener
+     * @param listener add listner
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
@@ -54,7 +55,7 @@ public final class FileFolder {
     /**
      * Remove PropertyChangeListener.
      *
-     * @param listener
+     * @param listener remove listner
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.removePropertyChangeListener(listener);
