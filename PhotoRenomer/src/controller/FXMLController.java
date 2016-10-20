@@ -12,7 +12,6 @@ import javafx.scene.control.ListCell;
 import launcher.PhotoRenamer;
 import viewmodel.FileFolderVM;
 import viewmodel.FolderVM;
-import viewmodel.ModderVM;
 
 /**
  *
@@ -39,15 +38,12 @@ public class FXMLController {
     private ListView<FileFolderVM> lvFiles;
     
     private FolderVM folderVM;
-    private ModderVM modderVM;
     private String lastPath = "";
     
     public void initialize() {
         folderVM = new FolderVM();
-        modderVM = new ModderVM();
         binding();
         setCellFactory();
-        listenListChange();
     }
     
     
@@ -84,9 +80,5 @@ public class FXMLController {
             }
         });
     }
-     
-    private void listenListChange() {
-        
-    }
-    
+       
 }
