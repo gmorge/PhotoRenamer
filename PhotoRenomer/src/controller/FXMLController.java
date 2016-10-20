@@ -12,6 +12,7 @@ import javafx.scene.control.ListCell;
 import launcher.PhotoRenamer;
 import viewmodel.FileFolderVM;
 import viewmodel.FolderVM;
+import viewmodel.ModderVM;
 
 /**
  *
@@ -38,13 +39,14 @@ public class FXMLController {
     private ListView<FileFolderVM> lvFiles;
     
     private FolderVM folderVM;
+    private ModderVM modderVM;
     
     public void initialize() {
         folderVM = new FolderVM();
-        tfPath.textProperty().bind(folderVM.initialPathProperty());
-        lvFiles.itemsProperty().bind(folderVM.fileListProperty());
-        lFileCount.textProperty().bind(folderVM.fileCountSProperty());
+        modderVM = new ModderVM();
+        binding();
         setCellFactory();
+        listenListChange();
     }
     
     
@@ -54,10 +56,14 @@ public class FXMLController {
         chooser.setTitle("PhotoRenamer");
         File result = chooser.showDialog(PhotoRenamer.getStage());
         path = result.getAbsolutePath();
-             
-        System.out.println("Path du Controller : " +path);
         folderVM.setInitialPath(path);
     
+    }
+    
+    private void binding() {
+        tfPath.textProperty().bind(folderVM.initialPathProperty());
+        lvFiles.itemsProperty().bind(folderVM.fileListProperty());
+        lFileCount.textProperty().bind(folderVM.fileCountSProperty());
     }
 
     private void setCellFactory() {
@@ -74,6 +80,9 @@ public class FXMLController {
             }
         });
     }
+     
+    private void listenListChange() {
         
+    }
     
 }
